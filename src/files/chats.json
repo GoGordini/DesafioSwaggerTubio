@@ -1,0 +1,22 @@
+[
+	{
+		"user": "pedro@gmail.com",
+		"message": "Hola",
+		"_id": "9b4c413c502241a2be6573b0"
+	},
+	{
+		"user": "ana@gmail.com",
+		"message": "Pedrito!",
+		"_id": "d37e8a19cacb4ed3a58f0f9c"
+	},
+	{
+		"user": "eleonora.tubio@gmail.com",
+		"message": "Olii",
+		"_id": "4f02d13ceed44c30b865ba38"
+	},
+	{
+		"user": "anadoder",
+		"message": "Ehh!",
+		"_id": "9a81a9659fb1461d8df89e38"
+	}
+]

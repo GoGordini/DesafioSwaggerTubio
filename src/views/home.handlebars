@@ -1,0 +1,34 @@
+<div class="addButton" id="{{user.cart._id}}">
+      {{!-- {{#if user.isAdmin }}
+     <p>Welcome {{user.first_name}}. You are logged in as admin! </p>
+     {{else}}
+     <p>Welcome {{user.first_name}}. You are logged in as user! Your cart is {{user.cart._id}}</p>
+     {{/if}}      --}}
+      
+     <p>Welcome {{user.first_name}}. You are logged in as {{user.role}}! Your cart is {{user.cart._id}}</p>  
+     <a href="/api/users/logout"><button>Salir</button></a>
+     {{#each products}} 
+ <ul>
+                <li>title: {{this.title}}</li> 
+                <li>description: {{this.description}}</li>
+                <li>code: {{this.code}}</li>
+                <li>price: {{this.price}}</li>
+                <li>status: {{this.status}}</li>
+                <li>stock: {{this.stock}}</li>
+                <li>category: {{this.category}}</li>
+</ul>
+     {{!-- <div><button onclick="addToCart(this._id)">Agregar al carrito</button></div> --}}
+   <div>  <button data-cart-id="{{user.cart._id}}" onclick="addToCart('{{this._id}}','{{../user.cart._id}}')">Agregar al carrito</button></div>
+     </br>
+     {{/each}}
+     {{#if hasPrevPage }}
+     {{!-- <a href="/?page={{prevPage}}&limit={{limit}}"><button>Anterior</button></a> --}}
+     <a href="{{prevLink}}"><button>Anterior</button></a>
+     {{/if}}
+     {{#if hasNextPage }}
+      <a href="{{nextLink}}"><button>Siguiente</button></a>
+     {{!-- <a href="/?page={{nextPage}}&limit={{limit}}"><button>Siguiente</button></a> --}}
+     {{/if}}     
+</div> 
+
+<script src="/js/cart.js"></script>

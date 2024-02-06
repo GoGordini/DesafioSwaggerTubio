@@ -1,0 +1,60 @@
+{{!-- <div style="display:flex; gap: 5rem;">
+  <div>
+
+    <h1 id="ola">Productos agregados</h1>
+    <div id="container">
+
+    </div>
+  </div>
+</div> --}}
+ {{!-- <div>
+     <h1>
+        Update Product
+    </h1>
+    <form id="formAdd" action="/api/products" method="post">
+    <label> Title</label>
+    <input name="title">
+    <label> Description</label>
+    <input name="description">
+     <label> Code </label>
+    <input name="code">
+    <label> Price</label>
+    <input name="price">
+    <label> Status</label>
+    <input name="status">
+    <label> Stock</label>
+    <input name="stock">
+    <label> Category</label>
+    <input name="category">
+    <input type="submit">
+    </form>
+</div>  --}}
+  {{!-- <div>
+     <h1>
+        Delete Product
+    </h1>
+    <form id="formDelete">
+    <label id="id_to_delete"> Id to delete</label>
+    <input name="id">
+    <input type="submit">
+    </form>
+  </div> --}}
+<div id="container">
+     {{#each products}}
+ <ul>
+                <li>title: {{this.title}}</li> 
+                <li>description: {{this.description}}</li>
+                <li>code: {{this.code}}</li>
+                <li>price: {{this.price}}</li>
+                <li>status: {{this.status}}</li>
+                <li>stock: {{this.stock}}</li>
+                <li>category: {{this.category}}</li>
+                <li>id: {{this.id}}</li>
+            </ul>
+    {{!-- <h1>Product</h1>
+    <p>Title: {{this.title}}</p>
+    <p>Price: {{this.price}}</p> --}}
+     {{/each}}
+</div> 
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>

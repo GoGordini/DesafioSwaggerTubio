@@ -1,0 +1,232 @@
+paths:
+  /api/products:
+    get:
+      summary: Este servicio obtiene el listado de todos los productos.
+      # El tag es un identificador que indica a donde (el recurso) pertenece el servicio
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los productos fueron obtenidos satisfactoriamente de la fuente de datos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno del servidor, usualmente generado por una query defectuosa o falla en la conexión.
+  /api/products/{pid}:
+      get:
+        summary: Este servicio obtiene un solo producto a partir de su pid (id de producto)
+        tags:
+          - Products
+        parameters:
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto a buscar
+            schema:
+              $type: String
+        responses:
+          "200":
+            description: El producto fue obtenido correctamente de la fuente de datos.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Product'
+          "404":
+            description: El producto no fue encontrado.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
+  
+      delete:
+        summary: Este servicio elimina un producto a partir de su pid (id de producto)
+        tags:
+          - Products
+        parameters:
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto a eliminar
+            schema:
+              $type: String
+        responses:
+          "200":
+            description: El producto fue eliminado de la fuente de datos.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Product'
+          "403":
+            description: El usuario no tiene permisos para realizar esta acción.
+          "404":
+            description: El producto no fue encontrado.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
+
+  /api/mockingproducts:
+    get:
+      summary: Obtiene datos ficticios de productos.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Datos ficticios de productos obtenidos satisfactoriamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la respuesta.
+                    enum: [ok]
+                  counter:
+                    type: integer
+                    description: Cantidad de productos generados.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno del servidor.
+    put:
+      summary: Este servicio actualiza el producto a partir de su pid.
+      tags:
+        - Products
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto a actualizar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateProduct'
+      responses:
+        "201":
+          description: El producto fue actualizado correctamente.
+        "404":
+          description: El producto no fue encontrado en la fuente de datos.
+        "500":
+          description:  Error interno del servidor, usualmente generado por una falla en la conexión.
+components:
+  schemas:
+    Product:
+      type: Object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del producto, autogenrado por mongodb.
+        title:
+          type: String
+          description: Título del producto.
+          required: True
+        description:
+          type: String
+          description: Descripción del producto.
+          required: true
+        price:
+          type: Number
+          description: Precio del producto.
+          required: true
+        thumbnail:
+          type: String
+          description: URL a la foto del producto.
+        code:
+          type: String
+          description: Código interno del producto.
+          required: true
+        category:
+          type: String
+          description: Categoría del producto.
+          required: true
+        stock: 
+          type: Number
+          description: Stock del producto.
+          required: true
+        status: 
+          type: Boolean
+          description: Status del producto.
+          default: true
+        owner:
+          type: String
+          description: Dueño del producto.
+          default: admin
+      example:
+        _id: ObjectId("jhaskd4545")
+        title: Set de piedra de ónix nativa
+        description: Set de guasha y roller facial de piedra de ónix nativa
+        price: 11500
+        thumbnail: https://res.cloudinary.com/dxvjohjkl/image/upload/v1681872886/roller-mas-guasha-jade1-61cb697893355a05f416281093726840-640-0_lnmuqh.webp
+        code: SETONIX
+        stock: 12
+        category: Sets
+        owner: anadodero@gmail.com
+  requestBodies:
+    updateProduct:
+      type: Object
+      properties:
+        title:
+          type: String
+          description: Título del producto.
+          required: True
+        description:
+          type: String
+          description: Descripción del producto.
+          required: true
+        price:
+          type: Number
+          description: Precio del producto.
+          required: true
+        thumbnail:
+          type: String
+          description: URL a la foto del producto.
+        code:
+          type: String
+          description: Código interno del producto.
+          required: true
+        category:
+          type: String
+          description: Categoría del producto.
+          required: true
+        stock: 
+          type: Number
+          description: Stock del producto.
+          required: true
+        status: 
+          type: Boolean
+          description: Status del producto.
+          default: true
+        owner:
+          type: String
+          description: Dueño del producto.
+          default: admin
+      example:
+        title: Set de piedra de ónix nativa
+        description: Set de guasha y roller facial de piedra de ónix nativa
+        price: 11500
+        thumbnail: https://res.cloudinary.com/dxvjohjkl/image/upload/v1681872886/roller-mas-guasha-jade1-61cb697893355a05f416281093726840-640-0_lnmuqh.webp
+        code: SETONIX
+        stock: 12
+        category: Sets
+        owner: anadodero@gmail.com
+  securitySchemes:
+    # bearerAuth:
+    #   type: http
+    #   scheme: bearer
+    #   bearerFormat: JWT
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: coderCookieToken
+      
+
+    

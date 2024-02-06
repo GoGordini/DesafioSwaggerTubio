@@ -1,0 +1,80 @@
+Encriptado
+
+npm install bcrypt
+
+En utils.js:
+
+import bcrypt from "bcrypt";
+
+//1. hashear nuestra contraseña
+const createHash = password =>
+        bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    //1234
+    //ASDASD435@#$#$
+
+//2. validar nuestro password
+const isValidPassword = (plainPassword, hashedPassword) =>
+    bcrypt.compareSync(plainPassword, hashedPassword);
+
+export {
+    __dirname,
+    createHash,
+    isValidPassword
+}
+
+Luego, en sessions.router.js:
+
+en lugar de guardar la pass como viene, se hashea, y cambiar en login la validación de la pass con isValidPassword. El resto sin cambios.
+
+__________
+
+PASSPORT
+
+npm install passport passport-local
+
+Creo en src una carpeta config y dentro un archivo passport.config.js
+La idea es sacar la responsabilidad del login del router. Corregir router de sesiones y finalmente app.js
+
+
+_________
+
+GITHUB
+
+Account, settings, dev setting. New GitHub App.
+Homepage URL: http://localhost:8080
+Callback URL: (es hacia donde se debe dirigir luego de la autenticación) http://localhost:8080/api/sessions/github-callback
+Webhook: desactivar
+Account permissions:
+*email addresses: read and write
+*plan: read only
+*profile: read and write
+Where can this GitHub App be installed? *Any account.
+
+About
+Owned by: @GoGordini
+
+App ID: 480240
+
+Client ID: Iv1.e0b3de4024dcd9c8
+
+Generate a new client secret:
+
+e425d65adad822a637381bac2342a9290f734eb6
+
+Volver a Settings, Access, Emails. Destildar Keep my email addresses private. Luego en Settings ir a Public Profile y poner mi mail en public email (y apretar update profile).
+
+Ya en VSC:
+
+npm i passport-github2
+
+*Cambios en config:
+
+Sacar el login (el login lo hará github).
+
+import GitHubStrategy from 'passport-github2';
+
+*Cambios en session router.
+
+*En app.js no cambia nada, solo reemplacé ecommerce por clase21 en el string de conexión.
+
+**Cambiar línea 109 de passportConfig.

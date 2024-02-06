@@ -1,0 +1,75 @@
+[
+	{
+		"title": "Roller Jade",
+		"description": "Roller facial de piedra de jade",
+		"price": 4500,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1682056274/ROLLER-JADE-600x600_ayumnr.jpg",
+		"code": "RollJAD",
+		"stock": 2,
+		"_id": 1
+	},
+	{
+		"title": "Roller Terahertz",
+		"description": "Roller facial de terahertz",
+		"price": 6500,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1681872964/TERAHERTZ-ROLLER_lhz5kf.jpg",
+		"code": "RollTER",
+		"stock": 10,
+		"_id": 2
+	},
+	{
+		"title": "Roller Cuarzo Rosa",
+		"description": "Roller facial de cuarzo rosa",
+		"price": 5500,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1682056346/ROLLER-CUARZO-ROSA-600x600_luuupp.jpg",
+		"code": "RollCUA",
+		"stock": 3,
+		"_id": 3
+	},
+	{
+		"title": "Guasha Jade",
+		"description": "Guasha de piedra de jade",
+		"price": 6500,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1682056404/GUA-SHA-CUARZO-ROSA-300x300_yn4kd9.jpg",
+		"code": "GuasJAD",
+		"stock": 4,
+		"_id": 4
+	},
+	{
+		"title": "Guasha Terahertz",
+		"description": "Guasha de terahertz",
+		"price": 8500,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1682056043/TERAHERTZ-GUA-SHA_mkfxdy.jpg",
+		"code": "GuasTER",
+		"stock": 7,
+		"_id": 5
+	},
+	{
+		"title": "Guasha Cuarzo Rosa",
+		"description": "Roller facial de cuarzo rosa",
+		"price": 7500,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1682056466/GUA-SHA-CUARZO-ROSA-2-600x600_yljwyx.jpg",
+		"code": "GuasCUA",
+		"stock": 5,
+		"_id": 6
+	},
+	{
+		"title": "Set Terahertz",
+		"description": "Set de guasha y roller facial de terahertz",
+		"price": 13000,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1682056829/619-rhFPW9L._AC_UF1000_1000_QL80__lwlt5l.jpg",
+		"code": "SetsTER",
+		"stock": 1,
+		"_id": "0fd0ac19b87543d7926737ff"
+	},
+	{
+		"title": "Set Jade",
+		"description": "Set de guasha y roller facial de piedra de jade",
+		"price": 9000,
+		"thumbnail": "https://res.cloudinary.com/dxvjohjkl/image/upload/v1681872886/roller-mas-guasha-jade1-61cb697893355a05f416281093726840-640-0_lnmuqh.webp",
+		"code": "SetsJAD",
+		"category": "Sets",
+		"stock": 2,
+		"_id": "0fd0ac19b87543d7926737fe"
+	}
+]

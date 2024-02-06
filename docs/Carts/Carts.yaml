@@ -1,0 +1,165 @@
+paths:  
+  
+  /api/carts/{cid}:
+      get:
+        summary: Este servicio obtiene un carrito a partir de su cid (id de carrito)
+        tags:
+          - Carts
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito a buscar
+            schema:
+              $type: String
+        responses:
+          "200":
+            description: El carrito fue obtenido correctamente de la base de datos.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'
+          "404":
+            description: El carrito no fue encontrado.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
+  
+      delete:
+        summary: Este servicio elimina un carrito a partir de su cid (id de carrito)
+        tags:
+          - Carts
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito a eliminar
+            schema:
+              $type: String
+        responses:
+          "200":
+            description: El carrito fue eliminado de la base de datos.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'          
+          "404":
+            description: El carrito no fue encontrado.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
+      
+      put:
+        summary: Este servicio actualiza el carrito a partir de su pid.
+        tags:
+          - Carts
+        security:
+          - cookieAuth: []
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito a actualizar
+            schema:
+              $type: String
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#components/requestBodies/updateCart'
+        responses:
+          "201":
+            description: El carrito fue actualizado correctamente.
+          "404":
+            description: El carrito no fue encontrado en la base de datos.
+          "422":
+            description: Valores incompletos.
+          "500":
+            description:  Error interno del servidor, usualmente generado por una falla en la conexión.
+  
+  /api/carts:      
+      post:
+        summary: Este servicio crea un carrito vacío.
+        tags:
+          - Carts
+        security:
+          - cookieAuth: []
+        responses:
+          "201":
+            description: El carrito fue creado correctamente.
+            content:
+                application/json:
+                  schema:
+                    $ref: '#components/schemas/EmptyCart'
+          "500":
+            description:  Error interno del servidor, usualmente generado por una falla en la conexión.
+
+components:
+  schemas:
+    Cart:
+      type: Object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del carrito, autogenrado por mongodb.
+        products:
+          type: Array
+          items:
+                  $ref: '#components/schemas/ProductInCart'
+          description: productos en el carrito.
+          default: []        
+      example:
+        _id: ObjectId("jhaskd4545")
+        products: 
+          - product: "6098c9bde4f239e8308d7f77"
+            quantity: 2
+
+    EmptyCart:
+      type: Object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del carrito, autogenrado por mongodb.
+        products:
+          type: Array
+          default: []        
+      example:
+        _id: ObjectId("jhaskd4545")
+        products: []
+          
+
+    ProductInCart:
+      type: Object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del producto, autogenrado por mongodb.
+        quantity:
+          type: Number
+          description: cantidad de unidades de este producto en el carrito.
+          default: 1        
+      example:
+        product: ObjectId("jhaskd4545")
+        quantity: 2
+  
+  requestBodies:
+    updateCart:
+      type: Object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del producto, autogenrado por mongodb.
+        quantity:
+          type: Number
+          description: cantidad de unidades de este producto en el carrito.
+          default: 1        
+      example:
+        product: ObjectId("jhaskd4545")
+        quantity: 2
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: coderCookieToken
+      
+
+    

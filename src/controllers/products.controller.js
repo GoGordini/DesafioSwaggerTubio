@@ -73,7 +73,7 @@ export const createProduct= async (req,res)=>{
         res.status(201).send({status:"success",payload:result});
         }
         catch(error) {
-        res.status(400).send({status:"error",message:error.cause})}
+        res.status(500).send({status:"error",message:error.cause})}
         }
 export const updateProduct=async (req,res)=>{
             try {

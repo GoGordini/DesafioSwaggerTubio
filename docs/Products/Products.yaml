@@ -7,7 +7,7 @@ paths:
         - Products
       responses:
         "200":
-          description: Los productos fueron obtenidos satisfactoriamente de la fuente de datos.
+          description: Los productos fueron obtenidos satisfactoriamente de la base de datos.
           content:
             application/json:
               schema:
@@ -30,7 +30,7 @@ paths:
               $type: String
         responses:
           "200":
-            description: El producto fue obtenido correctamente de la fuente de datos.
+            description: El producto fue obtenido correctamente de la base de datos.
             content:
               application/json:
                 schema:
@@ -53,7 +53,7 @@ paths:
               $type: String
         responses:
           "200":
-            description: El producto fue eliminado de la fuente de datos.
+            description: El producto fue eliminado de la base de datos.
             content:
               application/json:
                 schema:
@@ -64,6 +64,55 @@ paths:
             description: El producto no fue encontrado.
           "500":
             description: Error interno del servidor, usualmente generado por una falla en la conexión.
+      put:
+        summary: Este servicio actualiza el producto a partir de su pid.
+        tags:
+          - Products
+        security:
+          - cookieAuth: []
+        parameters:
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto a actualizar
+            schema:
+              $type: String
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#components/requestBodies/updateProduct'
+        responses:
+          "201":
+            description: El producto fue actualizado correctamente.
+          "404":
+            description: El producto no fue encontrado en la base de datos.
+          "500":
+            description:  Error interno del servidor, usualmente generado por una falla en la conexión.
+      post:
+        summary: Este servicio crea un producto.
+        tags:
+          - Products
+        security:
+          - cookieAuth: []
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#components/requestBodies/updateProduct'
+        responses:
+          "201":
+            description: El producto fue creado correctamente.
+            content:
+                application/json:
+                  schema:
+                    $ref: '#components/schemas/Product'
+          "400":
+            description: El producto ya existe.
+          "500":
+            description:  Error interno del servidor, usualmente generado por una falla en la conexión.
 
   /api/mockingproducts:
     get:
@@ -91,32 +140,7 @@ paths:
                       $ref: '#components/schemas/Product'
         "500":
           description: Error interno del servidor.
-    put:
-      summary: Este servicio actualiza el producto a partir de su pid.
-      tags:
-        - Products
-      security:
-        - cookieAuth: []
-      parameters:
-        - name: pid
-          in: path
-          required: true
-          description: El id del producto a actualizar
-          schema:
-            $type: String
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#components/requestBodies/updateProduct'
-      responses:
-        "201":
-          description: El producto fue actualizado correctamente.
-        "404":
-          description: El producto no fue encontrado en la fuente de datos.
-        "500":
-          description:  Error interno del servidor, usualmente generado por una falla en la conexión.
+
 components:
   schemas:
     Product:

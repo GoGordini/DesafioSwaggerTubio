@@ -1,5 +1,5 @@
 paths:  
-  
+
   /api/carts/{cid}:
       get:
         summary: Este servicio obtiene un carrito a partir de su cid (id de carrito)
@@ -92,6 +92,112 @@ paths:
                     $ref: '#components/schemas/EmptyCart'
           "500":
             description:  Error interno del servidor, usualmente generado por una falla en la conexión.
+
+  /api/carts/{cid}/product/{pid}:
+      
+      post:
+        summary: Este servicio agrega una unidad del producto correspondiente a pid (id de producto) al carrito identificado por cid (id de carrito)
+        tags:
+          - Carts
+        security:
+          - cookieAuth: []
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito al cual se agregará el producto
+            schema:
+              $type: String
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto a agregar
+            schema:
+              $type: String
+        responses:
+          "201":
+            description: El producto fue agregado al carrito.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'          
+          "404":
+            description: El carrito o el producto no fueron encontrados.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
+
+      delete:
+        summary: Este servicio elimina el producto correspondiente a pid (id de producto) de un carrito identificado con cid (id de carrito)
+        tags:
+          - Carts
+        security:
+          - cookieAuth: []
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito del cual se eliminará el producto
+            schema:
+              $type: String
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto a eliminar
+            schema:
+              $type: String
+        responses:
+          "200":
+            description: El producto fue eliminado del carrito.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'          
+          "404":
+            description: El carrito o el producto no fueron encontrados.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
+
+      put:
+        summary: Este servicio agrega la cantidad indicada en el body del producto correspondiente a pid (id de producto) al carrito identificado por cid (id de carrito)
+        tags:
+          - Carts
+        security:
+          - cookieAuth: []
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: El id del carrito al cual se agregará el producto
+            schema:
+              $type: String
+          - name: pid
+            in: path
+            required: true
+            description: El id del producto a agregar
+            schema:
+              $type: String
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quantity:
+                    type: number
+                    description: Cantidad del producto a agregar al carrito
+                    required: true
+        responses:
+          "201":
+            description: El producto fue agregado al carrito.
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/Cart'          
+          "404":
+            description: El carrito o el producto no fueron encontrados.
+          "500":
+            description: Error interno del servidor, usualmente generado por una falla en la conexión.
 
 components:
   schemas:

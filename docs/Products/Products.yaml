@@ -44,6 +44,8 @@ paths:
         summary: Este servicio elimina un producto a partir de su pid (id de producto)
         tags:
           - Products
+        security:
+          - cookieAuth: []
         parameters:
           - name: pid
             in: path
@@ -86,6 +88,8 @@ paths:
         responses:
           "201":
             description: El producto fue actualizado correctamente.
+          "403":
+            description: El usuario no tiene permisos para realizar esta acción.
           "404":
             description: El producto no fue encontrado en la base de datos.
           "500":
@@ -111,6 +115,8 @@ paths:
                     $ref: '#components/schemas/Product'
           "400":
             description: El producto ya existe.
+          "403":
+            description: El usuario no tiene permisos para realizar esta acción.
           "500":
             description:  Error interno del servidor, usualmente generado por una falla en la conexión.
 
